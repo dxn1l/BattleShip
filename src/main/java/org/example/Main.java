@@ -82,6 +82,65 @@ public class Main {
             }
         }
 
+        System.out.println("\n--- CONSULTA DE BARCOS (Tablas Hash) ---");
+        int opcion;
+        do {
+            System.out.println("\n¿Qué deseas hacer?");
+            System.out.println("1. Buscar barcos por tipo");
+            System.out.println("2. Buscar barco por número");
+            System.out.println("3. Buscar barco por nombre");
+            System.out.println("0. Continuar al juego");
+            System.out.print("Opción: ");
+            opcion = Integer.parseInt(scanner.nextLine());
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Introduce tipo de barco (Battleship / Frigate / Canoe): ");
+                    String tipoBuscar = scanner.nextLine().trim();
+                    List<Barco> barcosTipo = gestorHash.buscarPorTipo(tipoBuscar);
+                    if (barcosTipo.isEmpty()) {
+                        System.out.println("No se encontraron barcos de tipo " + tipoBuscar);
+                    } else {
+                        System.out.println("Barcos encontrados:");
+                        for (Barco b : barcosTipo) {
+                            System.out.println("- " + b.getNombre() + " (#" + b.getNumero() + ")");
+                        }
+                    }
+                    break;
+
+                case 2:
+                    System.out.print("Introduce número del barco: ");
+                    int numBuscar = Integer.parseInt(scanner.nextLine());
+                    Barco barcoNum = gestorHash.buscarPorNumero(numBuscar);
+                    if (barcoNum == null) {
+                        System.out.println("No se encontró barco con número " + numBuscar);
+                    } else {
+                        System.out.println("Barco encontrado: " + barcoNum.getNombre() + " de tamaño " + barcoNum.getTamanio());
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Introduce nombre del barco: ");
+                    String nombreBuscar = scanner.nextLine();
+                    Barco barcoNombre = gestorHash.buscarPorNombre(nombreBuscar);
+                    if (barcoNombre == null) {
+                        System.out.println("No se encontró barco con nombre " + nombreBuscar);
+                    } else {
+                        System.out.println("Barco encontrado: #" + barcoNombre.getNumero() + " de tipo tamaño " + barcoNombre.getTamanio());
+                    }
+                    break;
+
+                case 0:
+                    System.out.println("Comenzando el juego...");
+                    break;
+
+                default:
+                    System.out.println("Opción no válida.");
+            }
+
+        } while (opcion != 0);
+
+
         System.out.println("\n--- ¡Comienza el juego! ---");
 
         Random random = new Random();
@@ -113,7 +172,6 @@ public class Main {
                 break;
             }
         }
-
         scanner.close();
     }
 

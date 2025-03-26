@@ -65,7 +65,7 @@ public class Main {
 
                 barcoDirector.setBuilder(builder);
                 Barco barco = barcoDirector.construct(nombre, numero, nivel);
-                
+                gestorHash.insertarCompleto(tipo, barco);
                 barcosPorJugador.get(jugador).add(barco);
 
                 // Colocación simple: coordenadas y dirección
@@ -113,7 +113,6 @@ public class Main {
                 break;
             }
         }
-
         scanner.close();
     }
 
