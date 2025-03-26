@@ -1,0 +1,91 @@
+@startuml
+object jugador1 {
+  nombre = "Alice"
+}
+
+object jugador2 {
+  nombre = "Bob"
+}
+
+object tablero1_Alice
+object tablero2_Alice
+
+object tablero1_Bob
+object tablero2_Bob
+
+jugador1 : tableroPropio = tablero1_Alice
+jugador1 : tableroEnemigo = tablero2_Alice
+
+jugador2 : tableroPropio = tablero1_Bob
+jugador2 : tableroEnemigo = tablero2_Bob
+
+object battleship_Alice {
+  nombre = "Titanic"
+  numero = 101
+  nivel = 5
+  tamanio = 5
+}
+
+object frigate_Alice {
+  nombre = "Falcon"
+  numero = 102
+  nivel = 3
+  tamanio = 3
+}
+
+object canoe_Alice {
+  nombre = "Mini"
+  numero = 103
+  nivel = 1
+  tamanio = 1
+}
+
+object battleship_Bob {
+  nombre = "Leviathan"
+  numero = 201
+  nivel = 5
+  tamanio = 5
+}
+
+object frigate_Bob {
+  nombre = "Arrow"
+  numero = 202
+  nivel = 3
+  tamanio = 3
+}
+
+object canoe_Bob {
+  nombre = "Dot"
+  numero = 203
+  nivel = 1
+  tamanio = 1
+}
+
+object hashTipoBarco
+
+hashTipoBarco : tablaTipo = {"Battleship", "Frigate", "Canoe"}
+hashTipoBarco : tablaNumero = {101,102,103,201,202,203}
+hashTipoBarco : tablaNombre = {"Titanic", "Falcon", "Mini", "Leviathan", "Arrow", "Dot"}
+
+jugador1 --> tablero1_Alice
+jugador1 --> tablero2_Alice
+
+jugador2 --> tablero1_Bob
+jugador2 --> tablero2_Bob
+
+tablero1_Alice --> battleship_Alice
+tablero1_Alice --> frigate_Alice
+tablero1_Alice --> canoe_Alice
+
+tablero1_Bob --> battleship_Bob
+tablero1_Bob --> frigate_Bob
+tablero1_Bob --> canoe_Bob
+
+hashTipoBarco --> battleship_Alice
+hashTipoBarco --> frigate_Alice
+hashTipoBarco --> canoe_Alice
+
+hashTipoBarco --> battleship_Bob
+hashTipoBarco --> frigate_Bob
+hashTipoBarco --> canoe_Bob
+@enduml

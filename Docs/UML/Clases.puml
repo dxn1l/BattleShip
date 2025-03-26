@@ -1,0 +1,83 @@
+@startuml
+' Interfaces y Builder para barcos
+interface BarcoBuilder {
+    +setNombre(nombre: String): void
+    +setNumero(numero: Int): void
+    +setNivel(nivel: Int): void
+    +setTamanio(): void
+    +build(): Barco
+}
+
+class Director {
+    -builder: BarcoBuilder
+    +setBuilder(builder: BarcoBuilder): void
+    +construct(nombre: String, numero: Int, nivel: Int): Barco
+}
+
+class Barco {
+    -nombre: String
+    -numero: Int
+    -nivel: Int
+    -tamanio: Int
+    +getNombre(): String
+    +getNumero(): Int
+    +getNivel(): Int
+    +getTamanio(): Int
+}
+
+class BattleshipBuilder implements BarcoBuilder
+class FrigateBuilder implements BarcoBuilder
+class CanoeBuilder implements BarcoBuilder
+
+BarcoBuilder <|.. BattleshipBuilder
+BarcoBuilder <|.. FrigateBuilder
+BarcoBuilder <|.. CanoeBuilder
+Director --> BarcoBuilder
+Director --> Barco
+
+' Clases para el jugador y tablero
+interface JugadorBuilder {
+    +setNombre(nombre: String): void
+    +setTableroPropio(): void
+    +setTableroEnemigo(): void
+    +build(): Jugador
+}
+
+class Jugador {
+    -nombre: String
+    -tableroPropio: Tablero
+    -tableroEnemigo: Tablero
+    +getTableroPropio(): Tablero
+    +getTableroEnemigo(): Tablero
+}
+
+class Tablero {
+    -casillas: String[][]
+    +colocarBarco(barco: Barco): void
+    +recibirAtaque(x: Int, y: Int): boolean
+}
+
+class JugadorBuilderImpl implements JugadorBuilder
+class GameDirector {
+    -builder: JugadorBuilder
+    +setBuilder(builder: JugadorBuilder): void
+    +construct(nombre: String): Jugador
+}
+
+JugadorBuilder <|.. JugadorBuilderImpl
+GameDirector --> JugadorBuilder
+GameDirector --> Jugador
+
+' Hash de barcos
+class HashTipoBarco {
+    -tablaTipo: Map<String, List<Barco>>
+    -tablaNumero: Map<Int, Barco>
+    -tablaNombre: Map<String, Barco>
+    +insertar(barco: Barco): void
+    +buscarPorTipo(tipo: String): List<Barco>
+    +buscarPorNumero(numero: Int): Barco
+    +buscarPorNombre(nombre: String): Barco
+}
+
+HashTipoBarco --> Barco
+@enduml

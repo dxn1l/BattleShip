@@ -1,0 +1,33 @@
+@startuml
+start
+
+:Solicitar configuración de barcos para Jugador 1;
+:Solicitar configuración de barcos para Jugador 2;
+
+:Construir barcos con Director y Builders;
+:Crear jugadores con Builder (nombre y tableros);
+
+:Colocar barcos en tablero propio;
+
+repeat
+  :Jugador 1 realiza ataque aleatorio;
+  :Actualizar tablero enemigo de Jugador 1;
+
+  :Jugador 2 realiza ataque aleatorio;
+  :Actualizar tablero enemigo de Jugador 2;
+
+  :Comprobar si Jugador 1 tiene todos sus barcos hundidos;
+  :Comprobar si Jugador 2 tiene todos sus barcos hundidos;
+
+repeat while (ninguno ha perdido todos los barcos?)
+
+if (¿Ambos jugadores sin barcos?) then (sí)
+  :Resultado: Empate;
+elseif (¿Jugador 1 sin barcos?) then (sí)
+  :Resultado: Gana Jugador 2;
+elseif (¿Jugador 2 sin barcos?) then (sí)
+  :Resultado: Gana Jugador 1;
+endif
+
+stop
+@enduml
