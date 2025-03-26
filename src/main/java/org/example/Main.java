@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.barco.*;
+import org.example.hash.HashTipoBarco;
 import org.example.jugador.GameDirector;
 import org.example.jugador.Jugador;
 import org.example.jugador.JugadorBuilderImpl;
@@ -10,6 +11,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        HashTipoBarco gestorHash = new HashTipoBarco();
 
         GameDirector jugadorDirector = new GameDirector();
         JugadorBuilderImpl jugadorBuilder = new JugadorBuilderImpl();
@@ -63,6 +65,7 @@ public class Main {
 
                 barcoDirector.setBuilder(builder);
                 Barco barco = barcoDirector.construct(nombre, numero, nivel);
+                gestorHash.insertarCompleto(tipo, barco);
                 barcosPorJugador.get(jugador).add(barco);
 
                 // Colocación simple: coordenadas y dirección
