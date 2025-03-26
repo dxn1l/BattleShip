@@ -1,0 +1,80 @@
+# 🚢 Hundir la Flota - Proyecto en Java
+
+Este proyecto es una implementación modular del clásico juego **Hundir la Flota (Battleship)**, desarrollado como práctica de patrones de diseño en Java.
+
+---
+
+## 🧱 Estructura del Proyecto
+
+El juego se ha dividido en varios módulos con responsabilidades claras:
+
+| Módulo       | Descripción |
+|--------------|-------------|
+| `barco`      | Implementación de los barcos y sus builders (`Battleship`, `Frigate`, `Canoe`) |
+| `jugador`    | Generación de jugadores con el patrón Builder (nombre y tableros) |
+| `hash`       | Tablas hash locales para organizar barcos por tipo, nombre y número |
+| `grafo`      | Grafo no dirigido que representa puertos y distancias |
+| `main`       | Controlador principal del juego y menú de consulta |
+| `test`       | Pruebas unitarias organizadas con JUnit 5 |
+
+---
+
+## 🎮 ¿Cómo funciona el juego?
+
+1. Cada jugador introduce su nombre.
+2. Configura 3 barcos manualmente por consola.
+3. Los barcos se colocan en un tablero de 10x10.
+4. Comienza el juego:
+    - En cada turno, ambos jugadores atacan una posición aleatoria.
+    - Se comprueba si todos los barcos han sido hundidos.
+5. Al finalizar:
+    - Se declara el ganador o el empate.
+    - Se muestra un menú para consultar las tablas hash de barcos.
+
+---
+
+## 🧪 Pruebas Unitarias
+
+El proyecto incluye tests para:
+
+- Builders de barcos y jugadores
+- Inserciones y colisiones en tablas hash
+- Lógica del grafo de puertos
+- Funcionalidad del tablero
+
+Ejecuta los tests con:
+
+```bash
+mvn test
+```
+---
+
+## 🔧 Requisitos
+
+1. Java 17+
+2. Maven 3.6
+3. IDE recomendada: IntelliJ IDEA
+
+---
+
+## 📦 Instalación y Ejecución
+
+```bash
+git clone https://github.com/tuusuario/hundir-la-flota.git
+cd hundir-la-flota
+mvn compile
+mvn exec:java -Dexec.mainClass="org.example.Main"
+```
+o para el grafo de puertos:
+
+```bash
+mvn exec:java -Dexec.mainClass="org.example.MainGrafoPuertos"
+```
+
+---
+
+## 📌 Funcionalidades extras
+
+1. 🚀 Menú interactivo para consultar barcos en tablas hash
+2. 🔍 DFS y Dijkstra sobre grafo de puertos
+3. 🧠 Patrón Builder aplicado correctamente a jugadores y barcos
