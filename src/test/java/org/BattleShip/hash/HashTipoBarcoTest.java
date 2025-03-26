@@ -1,0 +1,37 @@
+package org.BattleShip.hash;
+
+import org.example.barco.Barco;
+import org.example.hash.HashTipoBarco;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class HashTipoBarcoTest {
+
+    @Test
+    public void testInsercionYBusqueda() {
+        HashTipoBarco hash = new HashTipoBarco();
+        Barco barco = new Barco("Leviathan", 101, 5, 5);
+
+        hash.insertarCompleto("Battleship", barco);
+
+        assertEquals(barco, hash.buscarPorNombre("Leviathan"));
+        assertEquals(barco, hash.buscarPorNumero(101));
+        assertTrue(hash.buscarPorTipo("Battleship").contains(barco));
+    }
+
+    @Test
+    public void testColision() {
+        HashTipoBarco hash = new HashTipoBarco();
+
+        Barco b1 = new Barco("Alpha", 1, 2, 3);
+        Barco b2 = new Barco("Bravo", 16, 2, 3); // 1 y 16 colisionan en tabla de número
+
+        hash.insertarPorNumero(b1);
+        hash.insertarPorNumero(b2);
+
+        assertEquals(b1, hash.buscarPorNumero(1));
+        assertEquals(b2, hash.buscarPorNumero(16));
+    }
+}
